@@ -6,27 +6,42 @@ import com.itheima.service.DeptService;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 
 @Slf4j //instead of using System.out.println
 @RestController
+@RequestMapping("/depts") // extract path
 public class DeptController {
 
     @Autowired
     private DeptService deptService;
 
     // @RequestMapping(value = "/depts", method = RequestMethod.GET)
-    @GetMapping("/depts")  //代替了上面的注解，衍生注解
+    @GetMapping  //代替了上面的注解，衍生注解
     public Result list() {
         log.info("查询所有部门数据");
         List<Dept> deptList = deptService.list();
         return Result.success(deptList);
     }
+
+    @DeleteMapping("/{id}")
+    public Result delete(@PathVariable Integer id) {
+        log.info("根据id删除部门，id：{}", id);
+        deptService.delete(id);
+        return Result.success();
+    }
+
+    @PostMapping
+    public Result add(@RequestBody Dept dept) {
+        log.info("新增部门，部门数据：{}", dept);
+        deptService.add(dept);
+        return Result.success();
+
+
+    }
+
 
 }
