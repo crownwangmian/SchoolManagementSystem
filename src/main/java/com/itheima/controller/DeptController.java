@@ -28,7 +28,7 @@ public class DeptController {
     }
 
     @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Integer id) {
+    public Result delete(@PathVariable Integer id) throws Exception {
         log.info("根据id删除部门，id：{}", id);
         deptService.delete(id);
         return Result.success();
@@ -38,6 +38,20 @@ public class DeptController {
     public Result add(@RequestBody Dept dept) {
         log.info("新增部门，部门数据：{}", dept);
         deptService.add(dept);
+        return Result.success();
+    }
+
+    @GetMapping("/{id}")
+    public Result getById(@PathVariable Integer id) {
+        log.info("根据id查询部门信息，id：{}", id);
+        Dept dept = deptService.getById(id);
+        return Result.success(dept);
+    }
+
+    @PutMapping()
+    public Result update(@RequestBody Dept dept) {
+        log.info("更新部门信息 {}",dept);
+        deptService.update(dept);
         return Result.success();
 
 
