@@ -1,5 +1,6 @@
 package com.itheima.controller;
 
+import com.itheima.anno.Log;
 import com.itheima.pojo.Emp;
 import com.itheima.pojo.PageBean;
 import com.itheima.pojo.Result;
@@ -27,14 +28,14 @@ public class EmpController {
         PageBean pagebean = empService.page(page, pageSize, name, gender, begin, end);
         return Result.success(pagebean);
     }
-
+    @Log
     @DeleteMapping("/{ids}")
     public Result delete(@PathVariable List<Integer> ids) {
         log.info("根据id删除员工：{}", ids);
         empService.delete(ids);
         return Result.success();
     }
-
+    @Log
     @PostMapping
     public Result save(@RequestBody Emp emp) {
         log.info("新增员工，员工信息：{}", emp);
@@ -48,7 +49,7 @@ public class EmpController {
         Emp emp = empService.getById(id);
         return Result.success(emp);
     }
-
+    @Log
     @PutMapping
     public Result update(@RequestBody Emp emp) {
         log.info("修改员工信息：{}", emp);

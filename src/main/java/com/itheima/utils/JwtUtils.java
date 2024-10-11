@@ -3,7 +3,7 @@ package com.itheima.utils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import java.util.Date;
+
 import java.util.Map;
 
 public class JwtUtils {
@@ -20,7 +20,7 @@ public class JwtUtils {
         String jwt = Jwts.builder()
                 .addClaims(claims)
                 .signWith(SignatureAlgorithm.HS256, signKey)
-                .setExpiration(new Date(System.currentTimeMillis() + expire))
+          //      .setExpiration(new Date(System.currentTimeMillis() + expire))
                 .compact();
         return jwt;
     }

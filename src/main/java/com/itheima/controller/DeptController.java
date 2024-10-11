@@ -1,10 +1,10 @@
 package com.itheima.controller;
 
+import com.itheima.anno.Log;
 import com.itheima.pojo.Dept;
 import com.itheima.pojo.Result;
 import com.itheima.service.DeptService;
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +27,7 @@ public class DeptController {
         return Result.success(deptList);
     }
 
+    @Log
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Integer id) throws Exception {
         log.info("根据id删除部门，id：{}", id);
@@ -34,6 +35,7 @@ public class DeptController {
         return Result.success();
     }
 
+    @Log
     @PostMapping
     public Result add(@RequestBody Dept dept) {
         log.info("新增部门，部门数据：{}", dept);
@@ -48,9 +50,10 @@ public class DeptController {
         return Result.success(dept);
     }
 
+    @Log
     @PutMapping()
     public Result update(@RequestBody Dept dept) {
-        log.info("更新部门信息 {}",dept);
+        log.info("更新部门信息 {}", dept);
         deptService.update(dept);
         return Result.success();
 

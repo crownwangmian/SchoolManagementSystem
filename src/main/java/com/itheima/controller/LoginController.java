@@ -15,8 +15,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /*
-* 生成令牌
-* */
+ * 生成令牌
+ * */
 
 @Slf4j
 @RestController
@@ -25,6 +25,7 @@ public class LoginController {
     @Autowired
     private EmpService empService;
 
+    //@Log
     @PostMapping
     public Result login(@RequestBody Emp emp) {
         log.info("登录，参数：{}", emp);
@@ -32,9 +33,10 @@ public class LoginController {
         //  登陆成功 生成令牌
         if (e != null) {
             Map<String, Object> claims = new HashMap<>();
-            claims.put("id", emp.getId());
-            claims.put("name", emp.getName());
-            claims.put("username", emp.getUsername());
+            claims.put("id", e.getId());
+            System.out.println(claims.get("========================id==================="));
+            claims.put("name", e.getName());
+            claims.put("username", e.getUsername());
             String jwt = JwtUtils.generateJwt(claims);// jwt包含了当前员工信息
             return Result.success(jwt);
         }
